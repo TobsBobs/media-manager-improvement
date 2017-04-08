@@ -40,7 +40,7 @@ class MediaViewFile extends JViewLegacy
 		$this->params = JComponentHelper::getParams('com_media');
 
 		$this->file         = $input->getString('path', null);
-		$this->fullFilePath = JUri::root() . $this->params->get('file_path', 'images') . '/' . $input->getString('path', null);
+		$this->fullFilePath = JUri::root() . $this->params->get('file_path', 'images') . $input->getString('path', null);
 
 		if (!$this->file && JFile::exists($this->fullFilePath))
 		{
@@ -64,9 +64,12 @@ class MediaViewFile extends JViewLegacy
 	{
 		JToolbarHelper::title(JText::_('COM_MEDIA_EDIT'), 'images mediamanager');
 
-		// @todo buttons
-		JToolbarHelper::apply('file.apply');
-		JToolbarHelper::save('file.save');
-		JToolbarHelper::cancel('file.cancel');
+		// @TODO buttons
+		JToolbarHelper::apply('apply', 'Upload');
+		JToolbarHelper::save('save', 'Upload & Close');
+		JToolbarHelper::custom('reset', 'refresh', '',  'Reset', false); // @TODO Tramslate
+		JToolbarHelper::custom('undo', 'undo', '',  'Undo', false); // @TODO Tramslate
+		JToolbarHelper::custom('redo', 'redo', '',  'Redo', false); // @TODO Tramslate
+		JToolbarHelper::cancel('cancel');
 	}
 }
